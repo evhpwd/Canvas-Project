@@ -1,0 +1,28 @@
+
+
+from canvasapi import Canvas
+from tokens import API_TOKEN, API_URL
+
+# Initialize a Canvas object
+canvas = Canvas(API_URL, API_TOKEN)
+
+# Get the current user (i.e., you)
+user = canvas.get_user('self')
+
+# Get all the enrollments for the user
+enrollments = user.get_enrollments(include=['course'])
+
+# Get the current user (i.e., you)
+user = canvas.get_user('self')
+
+# Get all the enrollments for the user
+enrollments = user.get_enrollments()
+
+# Extract the courses from the enrollments
+courses_info = [enrollment.course_id for enrollment in enrollments]
+
+# Print the list of course IDs and names
+print("List of Course IDs and Names:")
+for course_id in courses_info:
+    course = canvas.get_course(course_id)
+    print(f"Course ID: {course_id}, Course Name: {course.name}")
